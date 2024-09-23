@@ -51,25 +51,37 @@ stages:
         displayName: 'Maven Unit Tests'
 
 # Stage 3: Deploy
+stages:
 - stage: Deploy
   displayName: 'Deploy Stage'
-    dependsOn: Build  # Run deploy only if the build succeeds
+  dependsOn: Build  # Run deploy only if the build succeeds
   jobs:
-    - job: UnitTests
-      displayName: 'Run Deploy '
-      environment: 'deploy'# approval environment
+    - job: DeployJob
+      displayName: 'Run Deploy'
+      environment: 
+        name: 'DeployEnv'  # Environment name for deployment (can be set in Azure Pipelines UI)
+        resourceName: 'deploy'  # Optional: Environment resource name
+        approval:
+          approvals:
+            - type: Manual
+              timeout: '1h'  # Timeout if not approved within an hour
+              users:
+                - 'shruti.dhanwade@amrutsoftware.com'
+                - 'dholerahul707@gmail.com'
+              instructions: 'Please approve the deployment to the production environment.'
+
       strategy:
-      runOnce:
-      Deploy:
-      steps:
-      - task: Maven@4
-        inputs:
-          mavenPomFile: '/myagent/_work/4/s/my-app/pom.xml'
-          goals: 'deploy'
-          publishJUnitResults: true
-          testResultsFiles: '**/surefire-reports/TEST-*.xml'
-          javaHomeOption: 'JDKVersion'
-          mavenVersionOption: 'Default'
-          mavenAuthenticateFeed: false
-          effectivePomSkip: false
-          sonarQubeRunAnalysis: false
+        runOnce:
+          deploy:
+            steps:
+            - task: Maven@4
+              inputs:
+                mavenPomFile: '/myagent/_work/4/s/my-app/pom.xml'
+                goals: 'deploy'
+                publishJUnitResults: true
+                testResultsFiles: '**/surefire-reports/TEST-*.xml'
+                javaHomeOption: 'JDKVersion'
+                mavenVersionOption: 'Default'
+                mavenAuthenticateFeed: false
+                effectivePomSkip: false
+                sonarQubeRunAnalysis: false
