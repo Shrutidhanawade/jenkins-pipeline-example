@@ -49,3 +49,23 @@ stages:
           mavenVersionOption: 'Default'
           mavenAuthenticateFeed: false
         displayName: 'Maven Unit Tests'
+
+# Stage 3: Deploy
+- stage: Deploy
+  displayName: 'Deploy Stage'
+  dependsOn: Build  # Run deploy only if the build succeeds
+  jobs:
+    - job: UnitTests
+      displayName: 'Run Deploy '
+      steps:
+      - task: Maven@4
+        inputs:
+          mavenPomFile: '/myagent/_work/4/s/my-app/pom.xml'
+          goals: 'deploy'
+          publishJUnitResults: true
+          testResultsFiles: '**/surefire-reports/TEST-*.xml'
+          javaHomeOption: 'JDKVersion'
+          mavenVersionOption: 'Default'
+          mavenAuthenticateFeed: false
+          effectivePomSkip: false
+          sonarQubeRunAnalysis: false
