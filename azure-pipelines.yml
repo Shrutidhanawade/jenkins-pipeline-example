@@ -20,7 +20,7 @@ stages:
       steps:
       - task: Maven@4
         inputs:
-          mavenPomFile: '/my-app/pom.xml'
+          mavenPomFile: '/myagent/_work/4/s/my-app/pom.xml'
           goals: 'clean install'
           publishJUnitResults: true
           testResultsFiles: '**/surefire-reports/TEST-*.xml'
@@ -41,7 +41,7 @@ stages:
       steps:
       - task: Maven@4
         inputs:
-          mavenPomFile: '/my-app/pom.xml'
+          mavenPomFile: '/myagent/_work/4/s/my-app/pom.xml'
           goals: 'test'  # Only run tests in this stage
           publishJUnitResults: true
           testResultsFiles: '**/surefire-reports/TEST-*.xml'
