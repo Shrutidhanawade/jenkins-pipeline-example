@@ -1,0 +1,74 @@
+# Maven
+# Build your Java project and run tests with Apache Maven.
+# Add steps that analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/java
+
+trigger:
+- main
+
+pool:
+  name: 
+
+stages:
+
+# Stage 1: Build
+- stage: Build
+  displayName: 'Build Stage'
+   pool: azure-first project 
+  jobs:
+    - job: Build
+      displayName: 'Build Job'
+      steps:
+      - task: Maven@4
+        inputs:
+          mavenPomFile: '/myagent/_work/4/s/my-app/pom.xml'
+          goals: 'clean install'
+          publishJUnitResults: true
+          testResultsFiles: '**/surefire-reports/TEST-*.xml'
+          javaHomeOption: 'JDKVersion'
+          mavenVersionOption: 'Default'
+          mavenAuthenticateFeed: false
+          effectivePomSkip: false
+          sonarQubeRunAnalysis: false
+        displayName: 'Maven Build'
+
+# Stage 2: Test
+- stage: Test
+  displayName: 'Test Stage'
+  pool: Default
+  dependsOn: Build  # Run tests only if the build succeeds
+  jobs:
+    - job: UnitTests
+      displayName: 'Run Unit Tests'
+      steps:
+      - task: Maven@4
+        inputs:
+          mavenPomFile: '/myagent/_work/4/s/my-app/pom.xml'
+          goals: 'test'  # Only run tests in this stage
+          publishJUnitResults: true
+          testResultsFiles: '**/surefire-reports/TEST-*.xml'
+          javaHomeOption: 'JDKVersion'
+          mavenVersionOption: 'Default'
+          mavenAuthenticateFeed: false
+        displayName: 'Maven Unit Tests'
+
+# Stage 3: Deploy
+- stage: Deploy
+  displayName: 'Deploy Stage'
+  pool: azure-first project 
+  dependsOn: Build  # Run deploy only if the build succeeds
+  jobs:
+    - job: UnitTests
+      displayName: 'Run Deploy '
+      steps:
+      - task: Maven@4
+        inputs:
+          mavenPomFile: '/myagent/_work/4/s/my-app/pom.xml'
+          goals: 'deploy'
+          publishJUnitResults: true
+          testResultsFiles: '**/surefire-reports/TEST-*.xml'
+          javaHomeOption: 'JDKVersion'
+          mavenVersionOption: 'Default'
+          mavenAuthenticateFeed: false
+          effectivePomSkip: false
+          sonarQubeRunAnalysis: false
