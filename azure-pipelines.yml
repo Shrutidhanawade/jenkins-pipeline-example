@@ -51,7 +51,7 @@ stages:
         displayName: 'Maven Unit Tests'
 
 # Stage 3: Deploy
-stages:
+
 - stage: Deploy
   displayName: 'Deploy Stage'
   dependsOn: Build  # Run deploy only if the build succeeds
