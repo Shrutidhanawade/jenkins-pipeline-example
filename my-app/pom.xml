@@ -69,7 +69,24 @@
           <artifactId>maven-project-info-reports-plugin</artifactId>
           <version>3.0.0</version>
         </plugin>
+      
+        
       </plugins>
     </pluginManagement>
   </build>
+   <distributionManagement>
+<repository>
+  <id>dholerahul707</id>
+  <url>https://pkgs.dev.azure.com/dholerahul707/_packaging/dholerahul707/maven/v1</url>
+  <releases>
+    <enabled>true</enabled>
+  </releases>
+  <snapshots>
+    <enabled>true</enabled>
+  </snapshots>
+</repository>
+     </distributionManagement>
+   
+  
+  
 </project>
