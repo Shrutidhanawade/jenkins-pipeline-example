@@ -49,6 +49,11 @@ stages:
     - job: Deploy
       displayName: 'Deploy Job'
       steps:
+      - script: |
+          echo "Searching for JAR files..."
+          find $(System.DefaultWorkingDirectory) -name "*.jar"
+        displayName: 'Find JAR Files'
+
       - task: Maven@4
         inputs:
           mavenPomFile: '/myagent/_work/4/s/my-app/pom.xml'
