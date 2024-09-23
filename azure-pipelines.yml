@@ -54,7 +54,7 @@ stages:
 - stage: Deploy
   displayName: 'Deploy Stage'
     dependsOn: Build  # Run deploy only if the build succeeds
-    environment: 'deploy'
+    environment: 'deploy'# approval environment
      strategy:
       runOnce:
       Deploy:
