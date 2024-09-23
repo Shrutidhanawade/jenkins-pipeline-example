@@ -56,13 +56,12 @@ stages:
   displayName: 'Deploy Stage'
   dependsOn: Build  # Run deploy only if the build succeeds
   jobs:
-    - job: DeployJob
-      displayName: 'Run Deploy'
-      environment: deploy1
-      strategy:
-        runOnce:
-          deploy:
-            steps:
+  - deployment: 
+    environment: 'deploy'
+    strategy:
+     runOnce:
+       deploy:
+           steps:
             - task: Maven@4
               inputs:
                 mavenPomFile: '/myagent/_work/4/s/my-app/pom.xml'
