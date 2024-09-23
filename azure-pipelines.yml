@@ -58,18 +58,7 @@ stages:
   jobs:
     - job: DeployJob
       displayName: 'Run Deploy'
-      environment: 
-        name: 'deploy'  # Environment name for deployment (can be set in Azure Pipelines UI)
-        resourceName: 'deploy'  # Optional: Environment resource name
-        approval:
-          approvals:
-            - type: Manual
-              timeout: '1h'  # Timeout if not approved within an hour
-              users:
-                - 'shruti.dhanwade@amrutsoftware.com'
-                - 'dholerahul707@gmail.com'
-              instructions: 'Please approve the deployment to the production environment.'
-
+      environment: deploy1
       strategy:
         runOnce:
           deploy:
