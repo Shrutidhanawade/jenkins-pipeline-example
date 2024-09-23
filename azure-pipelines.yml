@@ -59,7 +59,7 @@ stages:
     - job: DeployJob
       displayName: 'Run Deploy'
       environment: 
-        name: 'DeployEnv'  # Environment name for deployment (can be set in Azure Pipelines UI)
+        name: 'deploy'  # Environment name for deployment (can be set in Azure Pipelines UI)
         resourceName: 'deploy'  # Optional: Environment resource name
         approval:
           approvals:
