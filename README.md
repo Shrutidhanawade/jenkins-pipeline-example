@@ -1,3 +1,3 @@
 # jenkins-pipeline-example
 
-webhook trigger-12
+webhook trigger-1
