@@ -90,16 +90,7 @@
         <url>http://192.168.75.144:8081/artifactory/Maven</url>
     </snapshotRepository>
 
-<repository>
-  <id>dholerahul707</id>
-  <url>https://pkgs.dev.azure.com/dholerahul707/_packaging/dholerahul707/maven/v1</url>
-  <releases>
-    <enabled>true</enabled>
-  </releases>
-  <snapshots>
-    <enabled>true</enabled>
-  </snapshots>
-</repository>
+
      </distributionManagement>
    
   
