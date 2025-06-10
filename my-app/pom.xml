@@ -25,6 +25,11 @@
       <version>4.11</version>
       <scope>test</scope>
     </dependency>
+    <dependency>
+                       <groupId>org.sonarsource.scanner.maven</groupId>
+                      <artifactId>sonar-maven-plugin</artifactId>
+                     <version>3.10.0.2594</version>
+                </dependency>
   </dependencies>
 
   <build>
@@ -77,25 +82,19 @@
       </plugins>
     </pluginManagement>
   </build>
+  
    <distributionManagement>
-
- 
-<snapshotRepository>
-        <id>snapshots</id>
-        <name>ip-172-31-20-73.ec2.internal-snapshots</name>
-        <url>http://54.144.64.253:8081/artifactory/libs-snapshot</url>
-    </snapshotRepository>
-
-         <repository>
+    <repository>
         <id>central</id>
-        <name>ip-172-31-20-73.ec2.internal-releases</name>
-        <url>http://54.144.64.253:8081/artifactory/libs-release</url>
+        <name>ip-172-31-13-156.ap-south-1.compute.internal-releases</name>
+        <url>http://15.207.55.160:8081/artifactory/app-lib</url>
     </repository>
-
-     
-
-
-     </distributionManagement>
+    <snapshotRepository>
+        <id>snapshots</id>
+        <name>ip-172-31-13-156.ap-south-1.compute.internal-snapshots</name>
+        <url>http://15.207.55.160:8081/artifactory/app-lib</url>
+    </snapshotRepository>
+</distributionManagement>
    
   
   
